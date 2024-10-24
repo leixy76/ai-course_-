@@ -8,8 +8,6 @@
 
 ## [4、RAG-QAnything应用](https://github.com/git-cloner/ai-course/tree/main/rag)
 
-
-
 ## 作者新书：
 
 ### 《大模型项目实战：多领域智能应用》
