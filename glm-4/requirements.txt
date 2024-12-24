@@ -1,7 +1,7 @@
 # basic
 torch==2.1.0
 torchvision==0.16.0
-transformers==4.40
+transformers==4.46.1
 huggingface-hub==0.23.0
 sentencepiece==0.2.0
 gradio==3.50.2
