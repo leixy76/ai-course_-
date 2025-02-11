@@ -19,10 +19,6 @@ conda activate deepseek
 # 安装VLLM
 pip install vllm==0.6.3.post1 \
 -i https://pypi.mirrors.ustc.edu.cn/simple
-# 卸载高版本的PyTorch
-pip uninstall torch torchaudio torchvision -y
-# 安装PyTorch2.4.0
-pip install torch==2.4.0 torchaudio==2.4.0 torchvision==0.19.0 -f https://mirrors.tuna.tsinghua.edu.cn/pytorch-wheels/torch_stable.html
 # 验证PyTorch（如果显示True则为正常）
 python -c "import torch; print(torch.cuda.is_available())"
 # 安装WEB页面依赖库
@@ -48,12 +44,27 @@ CUDA_VISIBLE_DEVICES=0 \
 vllm serve dataroot/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B \
 --max-model-len 8192 --disable-log-stats --enforce-eager \
 --host 0.0.0.0 --port 8000 --served-model-name deepseek \
---gpu-memory-utilization 0.6
+--dtype=half --gpu-memory-utilization 0.9
+
+# 参数解释
+# max-model-len 模型上下文长度（输入的问题最大长度）
+# disable-log-stats 禁用统计日志
+# enforce-eager 使用eager模式的PyTorch，提高性能
+# host 服务绑定的IP，0.0.0.0表示主机所有IP
+# port 服务绑定的端口
+# served-model-name 模型名称（客户端调用时使用）
+# dtype 模型权重和激活的数据类型(T4推理卡需要设置成half)
+# gpu-memory-utilization 用于模型执行器的 GPU 内存比例
 ```
 
 ## 五、运行WEB界面服务
 
 ```shell
+# 新开shell，激活虚拟环境
+conda activate deepseek
+# 运行Web界面服务
 streamlit run chat_bot.py
+# 访问Web界面
+http://服务器IP:8501
 ```
 
